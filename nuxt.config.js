@@ -46,8 +46,14 @@ export default {
    */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
+    proxy: true
   },
-
+  proxy: {
+    '/api/': {
+      target: 'https://api.exchangeratesapi.io/latest',
+      pathRewrite: { '^/api/': '' }
+    }
+  },
   /*
    ** Build configuration
    */

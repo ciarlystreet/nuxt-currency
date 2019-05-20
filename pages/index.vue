@@ -59,16 +59,7 @@ export default {
   async asyncData({ $axios, error, params }) {
     try {
       const { data } = await $axios.get(
-        'https://api.exchangeratesapi.io/latest?base=EUR', // &symbols=JPY
-        {
-          crossdomain: true,
-          headers: {
-            'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods':
-              'GET, POST, PATCH, PUT, DELETE, OPTIONS',
-            'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
-          }
-        }
+        '/api/?base=EUR' // &symbols=JPY
       )
       const currencies = []
       Object.keys(data.rates).forEach(key => {
