@@ -46,7 +46,10 @@ export default {
    */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
-    proxy: true
+    proxy: true,
+    proxyHeaders: false,
+    credentials: false,
+    headers: { 'Access-Control-Allow-Origin': '*' }
   },
   proxy: {
     '/api/': {
