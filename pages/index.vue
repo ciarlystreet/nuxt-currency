@@ -60,7 +60,15 @@ export default {
     try {
       const { data } = await $axios.get(
         'https://api.exchangeratesapi.io/latest?base=EUR', // &symbols=JPY
-        { crossdomain: true }
+        {
+          crossdomain: true,
+          headers: {
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods':
+              'GET, POST, PATCH, PUT, DELETE, OPTIONS',
+            'Access-Control-Allow-Headers': 'Origin, Content-Type, X-Auth-Token'
+          }
+        }
       )
       const currencies = []
       Object.keys(data.rates).forEach(key => {
