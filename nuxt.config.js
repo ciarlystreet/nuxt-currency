@@ -66,8 +66,8 @@ export default {
         })
       }
     }
-  },
-  router: {
-    base: process.env.NODE_ENV === 'production' ? '/dist' : ''
   }
+  // router: {
+  //   base: process.env.NODE_ENV === 'production' ? '/dist' : ''
+  // }
 }
