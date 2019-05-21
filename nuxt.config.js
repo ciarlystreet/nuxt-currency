@@ -1,7 +1,9 @@
 import pkg from './package'
+const env = require('dotenv').config()
 
 export default {
   mode: 'spa',
+  env: env.parsed,
 
   /*
    ** Headers of the page
@@ -46,6 +48,7 @@ export default {
    */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
+    baseURL: process.env.BASE_URL
   },
   /*
    ** Build configuration
@@ -65,8 +68,8 @@ export default {
         })
       }
     }
+  },
+  router: {
+    base: process.env.BASE_URL
   }
-  // router: {
-  //   base: process.env.NODE_ENV === 'production' ? '/dist' : ''
-  // }
 }
