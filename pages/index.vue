@@ -2,7 +2,12 @@
   <div>
     <b-form v-if="show" @submit.prevent="" @reset="onReset">
       <b-input-group :prepend="baseCurrency">
-        <b-form-input v-model.lazy="baseValue" type="number" required>
+        <b-form-input
+          v-model="baseValue"
+          type="number"
+          required
+          @focus="clearValue"
+        >
         </b-form-input>
       </b-input-group>
 
@@ -108,6 +113,9 @@ export default {
       this.$nextTick(() => {
         this.show = true
       })
+    },
+    clearValue() {
+      this.baseValue = null
     }
   }
 }

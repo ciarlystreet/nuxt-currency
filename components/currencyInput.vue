@@ -5,6 +5,7 @@
       v-model="currency.value"
       type="number"
       required
+      @focus="clearValue"
     >
     </b-form-input>
   </b-input-group>
@@ -48,6 +49,9 @@ export default {
         // Aggiorno il valore della valuta corrente
         this.currencies[key].value = parseFloat(currencyNewValue).toFixed(4)
       })
+    },
+    clearValue() {
+      this.currency.value = null
     }
   }
 }
