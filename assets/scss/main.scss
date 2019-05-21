@@ -1,5 +1,13 @@
 .input-group-prepend {
   min-width: 100px;
+
+  @media (min-width: 768px) and (max-width: 1024px) {
+    min-width: 20%;
+  }
+
+  @media (max-width: 767px) {
+    min-width: 25%;
+  }
   .input-group-text {
     width: 100%;
   }
