@@ -1,15 +1,21 @@
 <template>
-  <div>
+  <div class="col-8 offset-2 pt-5 pb-5">
     <b-form v-if="show" @submit.prevent="" @reset="onReset">
-      <b-input-group :prepend="baseCurrency">
-        <b-form-input
-          v-model="baseValue"
-          type="number"
-          required
-          @focus="clearValue"
-        >
-        </b-form-input>
-      </b-input-group>
+      <div class="row">
+        <div class="col-10">
+          <b-input-group :prepend="baseCurrency">
+            <b-form-input
+              v-model="baseValue"
+              type="number"
+              required
+              @focus="clearValue"
+            >
+            </b-form-input>
+          </b-input-group>
+          <hr />
+        </div>
+        <div class="col-2"></div>
+      </div>
 
       <currencyInput
         v-for="currency in currencies"
@@ -19,10 +25,12 @@
         :base-value="baseValue"
         :base-currency="baseCurrency"
       />
-
-      <b-button type="reset" variant="danger" @click="onReset">
-        Cancella
-      </b-button>
+      <hr />
+      <div class="col text-right">
+        <b-button type="reset" variant="danger" right @click="onReset">
+          Cancella
+        </b-button>
+      </div>
     </b-form>
   </div>
 </template>
