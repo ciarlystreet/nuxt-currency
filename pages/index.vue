@@ -1,5 +1,9 @@
 <template>
   <div class="col-10 offset-1 col-sm-8 offset-sm-2 pt-5 pb-5">
+    <blockquote class="blockquote">
+      <h1 class="mb-0">Currency</h1>
+      <footer class="blockquote-footer">Last updated {{ date }}</footer>
+    </blockquote>
     <b-form v-if="show" @submit.prevent="" @reset="onReset">
       <div class="row">
         <div class="col-10">
@@ -83,6 +87,8 @@ export default {
           }
         }
       )
+      // eslint-disable-next-line no-console
+      console.log(data)
       const currencies = []
       Object.keys(data.rates).forEach(key => {
         const valute = data.rates[key]
@@ -95,7 +101,8 @@ export default {
       })
       return {
         data,
-        currencies
+        currencies,
+        date: data.date
       }
     } catch (e) {
       error({
