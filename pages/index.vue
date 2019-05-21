@@ -1,5 +1,5 @@
 <template>
-  <div class="col-8 offset-2 pt-5 pb-5">
+  <div class="col-10 offset-1 col-sm-8 offset-sm-2 pt-5 pb-5">
     <b-form v-if="show" @submit.prevent="" @reset="onReset">
       <div class="row">
         <div class="col-10">
