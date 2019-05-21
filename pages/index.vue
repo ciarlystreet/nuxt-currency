@@ -59,7 +59,13 @@ export default {
   async asyncData({ $axios, error, params }) {
     try {
       const { data } = await $axios.get(
-        '?base=EUR' // &symbols=JPY
+        '/latest.json', // 'https://api.exchangeratesapi.io/latest',
+        {
+          params: {
+            base: 'EUR'
+            // symbols: 'JPY'
+          }
+        }
       )
       const currencies = []
       Object.keys(data.rates).forEach(key => {
