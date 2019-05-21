@@ -46,23 +46,6 @@ export default {
    */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
-    baseURL: 'https://api.exchangeratesapi.io/latest',
-    proxy: false,
-    proxyHeaders: false,
-    credentials: false,
-    headers: {
-      'Access-Control-Allow-Origin': '*',
-      'Access-Control-Allow-Headers':
-        'Authorization, Origin, X-Requested-With, Content-Type, Accept',
-      'Access-Control-Allow-Methods': 'POST, GET, OPTIONS, DELETE',
-      'Access-Control-Max-Age': 86400
-    }
-  },
-  proxy: {
-    '/api/': {
-      target: 'https://api.exchangeratesapi.io/latest',
-      pathRewrite: { '^/api/': '' }
-    }
   },
   /*
    ** Build configuration
