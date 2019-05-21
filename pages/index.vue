@@ -87,8 +87,6 @@ export default {
           }
         }
       )
-      // eslint-disable-next-line no-console
-      console.log(data)
       const currencies = []
       Object.keys(data.rates).forEach(key => {
         const valute = data.rates[key]
