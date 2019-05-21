@@ -21,14 +21,24 @@
         <div class="col-2"></div>
       </div>
 
-      <currencyInput
-        v-for="currency in currencies"
-        :key="currency.key"
-        :currencies="currencies"
-        :currency="currency"
-        :base-value="baseValue"
-        :base-currency="baseCurrency"
-      />
+      <draggable
+        draggable=".item"
+        v-bind="dragOptions"
+        @start="drag = true"
+        @end="drag = false"
+      >
+        <transition-group type="transition" :name="!drag ? 'flip-list' : null">
+          <currencyInput
+            v-for="currency in currencies"
+            :key="currency.key"
+            :currencies="currencies"
+            :currency="currency"
+            :base-value="baseValue"
+            :base-currency="baseCurrency"
+            class="item"
+          />
+        </transition-group>
+      </draggable>
 
       <div class="row">
         <div class="col-10 text-right">
@@ -44,14 +54,17 @@
 
 <script>
 import currencyInput from '~/components/currencyInput.vue'
+import draggable from 'vuedraggable'
 export default {
   components: {
-    currencyInput
+    currencyInput,
+    draggable
   },
   data() {
     return {
       currencies: [],
-      show: true
+      show: true,
+      drag: false
     }
   },
   computed: {
@@ -74,6 +87,14 @@ export default {
     },
     valuteEditing() {
       return this.$store.state.currencies.valuteEditing
+    },
+    dragOptions() {
+      return {
+        animation: 200,
+        group: 'description',
+        disabled: false,
+        ghostClass: 'ghost'
+      }
     }
   },
   async asyncData({ $axios, error, params }) {
