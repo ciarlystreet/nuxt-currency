@@ -25,8 +25,8 @@
         :base-value="baseValue"
         :base-currency="baseCurrency"
       />
-      <hr />
-      <div class="col text-right">
+      <div class="col-10 text-right">
+        <hr />
         <b-button type="reset" variant="danger" right @click="onReset">
           Cancella
         </b-button>
