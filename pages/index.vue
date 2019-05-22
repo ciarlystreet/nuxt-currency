@@ -2,7 +2,7 @@
   <div class="col-10 offset-1 col-sm-8 offset-sm-2 pt-5 pb-5">
     <blockquote class="blockquote">
       <h1 class="mb-0">Currency</h1>
-      <footer class="blockquote-footer">Last updated {{ date }}</footer>
+      <footer class="blockquote-footer">Last updated on {{ date }}</footer>
     </blockquote>
     <b-form v-if="show" @submit.prevent="" @reset="onReset">
       <div class="row">
@@ -44,7 +44,7 @@
         <div class="col-10 text-right">
           <hr />
           <b-button type="reset" variant="danger" right @click="onReset">
-            Cancella
+            Reset
           </b-button>
         </div>
       </div>
@@ -73,7 +73,7 @@ export default {
         return this.$store.state.currencies.base.value
       },
       set: function(newVal) {
-        // Aggiorno il valore della valura di base nello store
+        // Updating the value of the base currency in the store
         this.$store.dispatch(
           'currencies/updateValuteEditing',
           this.baseCurrency
@@ -126,20 +126,20 @@ export default {
     } catch (e) {
       error({
         statusCode: 503,
-        message: 'Impossibile ottenere le valute di cambio correnti'
+        message: 'Unable to get current exchange rates, please try again later.'
       })
     }
   },
   methods: {
     updateNoBaseCurrencies(newBaseValue) {
-      // Scorro tutte le valute
+      // Scanning all the available currencies
       Object.keys(this.currencies).forEach(key => {
         const currency = this.currencies[key]
-        // Escludo la valuta di base
+        // Excluding the base currency
         if (this.baseCurrency === currency.key) return false
-        // Calcolo il nuovo valore della valuta corrente
+        // Calculating the new value of the current currency
         const currencyNewValue = (currency.valute * newBaseValue) / 1
-        // Aggiorno il valore della valuta corrente
+        // Updating the value of the current currency
         this.currencies[key].value = parseFloat(currencyNewValue).toFixed(4)
       })
     },

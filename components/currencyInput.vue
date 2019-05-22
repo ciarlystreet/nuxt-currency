@@ -42,12 +42,10 @@ export default {
     currency: {
       handler: function(newValue) {
         if (this.valuteEditing !== null) return false
-
-        // è cambiata una valuta non di base e devo aggiornare la valuta di base di conseguenza si aggiorneranno tutte le altre
         this.$store.dispatch('currencies/updateValuteEditing', newValue.key)
         const num = (1 * newValue.value) / newValue.valute
         this.$store.commit('currencies/updateBaseValue', num)
-        this.updateOtherNoBaseCurrencies(newValue.key) // FIXME Fare in modo che, al varaire il valore di una valuta, si aggiornino anche i valori delle altre valute
+        this.updateOtherNoBaseCurrencies(newValue.key)
       },
       deep: true
     },
@@ -58,18 +56,18 @@ export default {
   },
   methods: {
     updateOtherNoBaseCurrencies(fromValuteKey) {
-      // Scorro tutte le valute
+      // Scanning all the available currencies
       Object.keys(this.currencies).forEach(key => {
         const currency = this.currencies[key]
-        // Escludo la valuta di base
+        // Excluding the base currency
         if (
           this.baseCurrency === currency.key ||
           fromValuteKey === currency.key
         )
           return false
-        // Calcolo il nuovo valore della valuta corrente
+        // Calculating the new value of the current currency
         const currencyNewValue = (currency.valute * this.baseValue) / 1
-        // Aggiorno il valore della valuta corrente
+        // Updating the value of the current currency
         this.currencies[key].value = parseFloat(currencyNewValue).toFixed(4)
       })
     },
