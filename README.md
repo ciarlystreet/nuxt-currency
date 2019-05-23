@@ -4,7 +4,7 @@ Basic currency converter with nuxtjs
 
 ## Demo
 
-[nuxt-currency.netlify.com](https://nuxt-currency.netlify.com/)
+[ciarlystreet.github.io/nuxt-currency/](https://ciarlystreet.github.io/nuxt-currency/)
 
 ## Build Setup
 
