@@ -1,10 +1,25 @@
 import pkg from './package'
 const env = require('dotenv').config()
+const routerBase =
+  process.env.DEPLOY_ENV === 'GH_PAGES'
+    ? {
+        router: {
+          base: process.env.BASE_GITHUB_PAGE_URL
+        }
+      }
+    : {
+        router: {
+          base: process.env.BASE__URL
+        }
+      }
 
 export default {
   mode: 'spa',
   env: env.parsed,
-
+  ...routerBase,
+  generate: {
+    dir: 'docs'
+  },
   /*
    ** Headers of the page
    */
@@ -52,7 +67,7 @@ export default {
    */
   axios: {
     // See https://github.com/nuxt-community/axios-module#options
-    baseURL: process.env.BASE_URL
+    baseURL: process.env.BASE_GITHUB_PAGE_URL
   },
   /*
    ** Build configuration
@@ -62,6 +77,10 @@ export default {
      ** You can extend webpack config here
      */
     extend(config, ctx) {
+      if (!ctx.isDev) {
+        // config.output.publicPath = '_nuxt/'
+      }
+
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {
         config.module.rules.push({
@@ -72,8 +91,5 @@ export default {
         })
       }
     }
-  },
-  router: {
-    base: process.env.BASE_URL
   }
 }
